@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Employee Overlay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        canvas {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .status {
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Employee Overlay</h1>
+    <div class="input-group">
+        <label for="jsonFile">JSON File:</label>
+        <input type="file" id="jsonFile" accept=".json">
+    </div>
+    <div class="input-group">
+        <label for="imageFile">Image File (PNG or JPG):</label>
+        <input type="file" id="imageFile" accept="image/png,image/jpeg">
+    </div>
+    <div class="input-group">
+        <label for="privacyLevel">Privacy Level:</label>
+        <select id="privacyLevel">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+        </select>
+    </div>
+    <div class="input-group">
+        <label for="fitMode">Image Fit Mode:</label>
+        <select id="fitMode">
+            <option value="fit" selected>Fit (вписать с черным фоном)</option>
+            <option value="stretch">Stretch (растянуть)</option>
+            <option value="crop">Crop (обрезать)</option>
+        </select>
+    </div>
+    <div class="status" id="privacyStatus">Текущий уровень приватности: medium</div>
+    <div class="input-group">
+        <label for="rectX">X Coordinate:</label>
+        <input type="number" id="rectX" value="50">
+    </div>
+    <div class="input-group">
+        <label for="rectY">Y Coordinate:</label>
+        <input type="number" id="rectY" value="50">
+    </div>
+    <div class="input-group">
+        <label for="fontSize">Font Size (px):</label>
+        <input type="number" id="fontSize" value="30">
+    </div>
+    <div class="input-group">
+        <label for="blurRadius">Blur Radius (0-20):</label>
+        <input type="range" id="blurRadius" min="0" max="20" value="0">
+        <span id="blurValue">0</span>
+    </div>
+    <button id="testButton">Тестировать</button>
+    <button id="downloadJsonButton" disabled>Скачать JSON</button>
+    <div id="error" class="error"></div>
+    <canvas id="outputCanvas"></canvas>
+
+    <hr>
+    <h2>Webcam Segmentation (YOLO11n-seg ONNX)</h2>
+    <div class="input-group">
+        <label for="bgFile">Выберите фоновое изображение:</label>
+        <input type="file" id="bgFile" accept="image/*">
+    </div>
+    <div class="input-group">
+        <button id="startSeg">Старт вебкамеры</button>
+        <button id="stopSeg" disabled>Стоп</button>
+    </div>
+    <div class="status" id="modelStatus">Модель: загружается…</div>
+    <video id="webcam" autoplay playsinline muted style="display:none;"></video>
+    <canvas id="segCanvas" width="1280" height="720" style="border:1px solid #333; display:block; margin-top:10px;"></canvas>
+
+    <script src="site1.js"></script>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+    <script src="seg.js"></script>
+</body>
+</html>
