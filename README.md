@@ -20,12 +20,29 @@ git clone https://github.com/ZHKKKang/MODNet.git
 
 ## Запуск программы
 
+### Python версия (локальное видеопотребление)
+
 ```bash
+# YOLO сегментация
 python src/yolo_segmentation.py
 
-#Для MODNet
+# MODNet сегментация
 python src/modnet_seg.py
 
-#Для комбинированных YOLO
+# Комбинированная YOLO (тело + руки)
 python src/yolo_combined.py
 ```
+
+### Веб-версия (npm)
+
+1. **Установка зависимостей:**
+```bash
+cd web
+npm install
+```
+
+2. **Запуск локального сервера:**
+```bash
+npm start
+```
+
